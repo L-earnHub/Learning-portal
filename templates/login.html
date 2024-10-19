@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | L-EarnHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"></link>
+    <script src="{% static 'script.js' %}" defer></script>
+    <style>
+        body {
+            background-color: #d1eff1;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .brand-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #0a0a0a;
+        }
+
+        .login-container {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .login-box {
+            background-color: #fcfbfb;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 400px;
+            z-index: 2;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .login-box h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+            border-radius: 25px;
+            padding: 12px;
+        }
+
+        .btn-login {
+            background-color: #6f42c1;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border-radius: 25px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-login:hover {
+            background-color: #563d7c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .footer a {
+            color: #6f42c1;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"><p class="company-name">L-EarnHub</p></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login Now</h2>
+
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Enter your email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Enter your password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-login">Login</button>
+            </form>
+
+            <div class="signup-link">
+                Haven't created an account? <a href="{% url 'signup' %}">Sign up</a>
+            </div>
+
+            <div class="footer">
+                © 2024 by <a href="#">CRAVE Solutions Pvt Limited</a> | all rights reserved!
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

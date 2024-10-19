@@ -1,0 +1,143 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification | L-EarnHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"></link>
+    <script src="{%  static 'script.js' %}" defer></script>
+    <style>
+        body {
+            background-color: #d1eff1;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .brand-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #0a0a0a;
+        }
+
+        .otp-container {
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .otp-box {
+            background-color: #fcfbfb ;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 400px;
+            text-align: center;
+            
+        }
+
+        .otp-box h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+            border-radius: 25px;
+            padding: 12px;
+        }
+
+        .btn-verify {
+            background-color: #6f42c1;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border-radius: 25px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-verify:hover {
+            background-color: #563d7c;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .footer a {
+            color: #6f42c1;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"><p class="brand-logo">L-EarnHub</p></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="otp-container">
+        <div class="otp-box">
+            <h2>OTP Verification</h2>
+            <p>We have sent an OTP to your registered email. Please enter it below.</p>
+
+            {% for message in messages %}
+                <h5 class="error-message">{{ message }}</h5>
+            {% endfor %}
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" id="otp" name="otp" maxlength="6" required placeholder="Enter OTP" autofocus>
+                </div>
+                <button type="submit" class="btn btn-verify">Verify OTP</button>
+            </form>
+
+            <button id="resendOtp" class="btn btn-secondary mt-3">Resend OTP</button>
+            <div class="footer">
+                © 2024 by <a href="#">CRAVE Solutions Pvt Limited</a> | all rights reserved!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('resendOtp').addEventListener('click', function() {
+            alert('OTP resent to your registered email!');
+            fetch('/resend_otp', { method: 'POST', headers: { 'X-CSRFToken': '{{ csrf_token }}' }})
+                .then(response => {
+                    if (response.ok) {
+                        alert('New OTP sent!');
+                    } else {
+                        alert('Error sending OTP. Please try again later.');
+                    }
+                });
+        });
+    </script>
+</body>
+</html>

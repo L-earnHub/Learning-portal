@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
-    'main',
-    'payment',
+    # 'main',
+    # 'payment',
 ]
 
 MIDDLEWARE = [
@@ -130,9 +130,9 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-XATA_WORKSPACE_ID='3rj5i6'
+# XATA_WORKSPACE_ID='3rj5i6'
 
-RAZORPAY_KEY_ID = ''
-RAZORPAY_SECRET_KEY = ''
+# RAZORPAY_KEY_ID = ''
+# RAZORPAY_SECRET_KEY = ''
 
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
